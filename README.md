@@ -93,9 +93,17 @@ Ou dans `.claude/skills/` d'un projet pour la limiter à ce projet.
 
 ### Claude (claude.ai et applications)
 
-1. Compresser le dossier `tuteur-socratique/` ou `tuteur-socratique-adulte/` en
-   `.zip` (le dossier lui-même, pas seulement son contenu).
-2. L'importer dans les paramètres de Claude, section Skills.
+1. Télécharger le `.zip` de la skill voulue :
+   - [tuteur-socratique.zip](https://github.com/adrienpoly/tuteur-socratique/releases/latest/download/tuteur-socratique.zip)
+     (élèves et étudiants, du CP au supérieur) ;
+   - [tuteur-socratique-adulte.zip](https://github.com/adrienpoly/tuteur-socratique/releases/latest/download/tuteur-socratique-adulte.zip)
+     (adultes, hors cadre scolaire).
+2. L'importer tel quel, sans le décompresser, dans les paramètres de Claude,
+   section Skills.
+
+Ces fichiers sont produits à chaque version publiée. Pour installer une version
+modifiée, compresser soi-même le dossier de la skill (le dossier lui-même, pas
+seulement son contenu) et importer ce `.zip`.
 
 ### ChatGPT
 
@@ -181,3 +189,5 @@ l'enfant. Le profil primaire est écrit dans ce sens.
   du démarrage dans `SKILL.md`.
 - La version pour adultes est un fichier indépendant : une règle de méthode modifiée
   dans l'une des deux skills est à reporter dans l'autre.
+- Pour publier une version : pousser un tag `vX.Y.Z`. Le workflow
+  `.github/workflows/release.yml` crée la release et y attache les deux `.zip`.

@@ -118,3 +118,7 @@ ci-dessus.
 ## Git
 
 Ne pas commiter ni pousser sans demande explicite.
+
+Un tag `vX.Y.Z` poussé déclenche `.github/workflows/release.yml`, qui publie une
+release avec un `.zip` par skill. Le README pointe vers `releases/latest` : ne pas
+renommer les dossiers des skills sans mettre à jour le workflow et ces liens.
