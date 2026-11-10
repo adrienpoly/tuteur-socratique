@@ -47,3 +47,25 @@ qui apprend un sujet hors cadre scolaire.
   bonne réponse, signalée « placement de départ, à confirmer ». Les deux skills
   ne disent pas comment fixer le niveau initial ; à préciser si ce placement
   paraît trop généreux.
+
+# Améliorations version adulte + GPT collège (2026-11-10)
+
+- [x] Adulte : garde étendue aux demandes de travail, maintien en séance,
+      conversations indépendantes, « par quoi reprendre » dans le bloc
+- [x] Niveau de départ après diagnostic (3 au plus si réussi, 0 à 2 sinon), reporté
+      dans `tuteur-socratique/SKILL.md` et `chatgpt/college.md`
+- [x] `chatgpt/college.md` : règles communes + profil collège en un seul texte
+- [x] README et `.claude/CLAUDE.md` mis à jour
+- [x] Tailles : voir Résultats
+
+## Résultats
+
+- Tailles : `tuteur-socratique` 7 853, `tuteur-socratique-adulte` 7 941,
+  `chatgpt/college.md` 7 896 caractères.
+- Séances d'essai tour par tour (un sous-agent tuteur, réponses de l'élève envoyées
+  une à une) : collège sur Pythagore, adulte sur SQL. Vérifié : question ponctuelle
+  et demande de travail sans tutorat, une question à la fois, erreur suivie d'une
+  question plus étroite, réponse non justifiée non comptée, niveau de départ
+  plafonné à 3, `?` pour le non testé, bloc de sauvegarde avec « reprendre par ».
+- Non rejoué : « reprendre : » dans une nouvelle conversation, avocat du diable,
+  bilan final, et les profils primaire, lycée et supérieur.

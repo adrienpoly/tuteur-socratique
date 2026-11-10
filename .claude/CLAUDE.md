@@ -19,6 +19,8 @@ tuteur-socratique/
     └── superieur.md               après le bac, adultes
 tuteur-socratique-adulte/
 └── SKILL.md                       version générique pour adultes, sans profil
+chatgpt/
+└── college.md                     instructions d'un GPT collège, en un seul texte
 ```
 
 ## Où mettre quoi
@@ -41,6 +43,11 @@ tuteur-socratique-adulte/
   et les valeurs du profil supérieur, sans classe, programme ni examen. Une règle de
   méthode (boucle d'enseignement, évaluation, carte, commandes) modifiée dans l'une
   des deux skills est à reporter dans l'autre.
+- `chatgpt/college.md` : fusion de `tuteur-socratique/SKILL.md` et de
+  `references/college.md`, sans en-tête YAML, à coller tel quel dans les
+  instructions d'un GPT. Toute règle modifiée dans l'une de ses deux sources est à
+  y reporter. Le fichier entier doit rester sous 8 000 caractères
+  (`wc -m chatgpt/college.md`).
 
 ## Contraintes
 
