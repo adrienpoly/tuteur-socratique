@@ -1,13 +1,17 @@
 # Tuteur socratique
 
-Une skill pour Claude (utilisable aussi avec ChatGPT) qui transforme l'assistant en
-tuteur personnel pour les élèves et étudiants français, du CP au supérieur.
+Deux skills pour Claude (utilisables aussi avec ChatGPT) qui transforment
+l'assistant en tuteur personnel :
+
+- `tuteur-socratique` : pour les élèves et étudiants français, du CP au supérieur ;
+- `tuteur-socratique-adulte` : une version générique pour un adulte qui veut
+  apprendre un sujet de son choix, hors cadre scolaire.
 
 Le tuteur n'explique pas le cours : il pose des questions, une à la fois, qui
 obligent l'élève à raisonner, prévoir et justifier. Il suit la progression sur une
 carte de compétences et ne valide un niveau que sur des réussites réelles.
 
-## Ce que fait la skill
+## Ce que font les skills
 
 - **Diagnostic de départ** : 3 à 5 questions pour situer l'élève avant d'enseigner
   quoi que ce soit.
@@ -22,11 +26,11 @@ carte de compétences et ne valide un niveau que sur des réussites réelles.
   et systématiquement à la reprise d'une séance sauvegardée.
 - **Gestion du blocage** : retour à une question plus simple, exemple résolu, pause.
 - **Bilan final** : une question par compétence et un problème de synthèse.
-- **Ancrage français** : programmes officiels, classe de l'élève, examens (brevet,
-  bac, partiels, concours), notations et terminologie françaises, exigence de
-  rédaction.
+- **Ancrage français** (`tuteur-socratique` seulement) : programmes officiels,
+  classe de l'élève, examens (brevet, bac, partiels, concours), notations et
+  terminologie françaises, exigence de rédaction.
 
-## Quatre profils
+## Quatre profils scolaires
 
 Le tuteur demande la classe au début de la séance et charge le profil correspondant.
 
@@ -36,6 +40,26 @@ Le tuteur demande la classe au début de la séance et charge le profil correspo
 | [Collège](tuteur-socratique/references/college.md) | 6e à 3e | 20 à 30 min | après 2 erreurs | barres + échelle du socle commun | brevet, pas de résultat final donné sur un devoir à rendre |
 | [Lycée](tuteur-socratique/references/lycee.md) | 2de à Tle, CAP, bac pro | 30 à 45 min | après 3 erreurs | barres, niveaux sur 5 | épreuves du bac, méthodes (dissertation, commentaire, démonstration), entraînement en temps limité |
 | [Supérieur](tuteur-socratique/references/superieur.md) | après le bac, adultes | 45 à 60 min | après 2 ou 3 erreurs | barres, niveaux sur 5 | énoncés exacts, contre-exemples, mode examinateur pour les colles et concours |
+
+## Version pour adultes
+
+`tuteur-socratique-adulte` reprend la même méthode (diagnostic, carte de
+compétences, évaluation exigeante, révisions espacées, bilan final, mêmes
+commandes) sans rien de scolaire. Elle tient en un seul fichier, sans profil.
+
+- **Démarrage** : au lieu de la classe, le tuteur demande pourquoi la personne veut
+  apprendre le sujet, ce qu'elle veut savoir faire à la fin, ce qu'elle connaît déjà
+  et les supports qu'elle utilise.
+- **Découpage** : selon la logique du domaine et l'usage visé, pas selon un
+  programme.
+- **Questions** : tirées du métier ou du projet de la personne ; l'expérience
+  déclarée ne vaut pas preuve.
+- **Réglages** : séance de 30 à 60 minutes, aide directe après 2 ou 3 erreurs,
+  avocat du diable, niveau cible 4 (5 sur demande), « donne-moi la réponse » sans
+  restriction.
+
+Pour un étudiant ou un adulte en formation qui prépare un examen, préférer
+`tuteur-socratique` et son profil supérieur.
 
 ## Structure du dépôt
 
@@ -47,29 +71,32 @@ tuteur-socratique/
     ├── college.md
     ├── lycee.md
     └── superieur.md
+tuteur-socratique-adulte/
+└── SKILL.md              version générique pour adultes, en un seul fichier
 ```
 
 ## Installation
 
 ### Claude Code
 
-Copier le dossier de la skill dans le répertoire des skills personnelles :
+Copier le dossier de la skill voulue (ou les deux) dans le répertoire des skills
+personnelles :
 
 ```bash
-cp -r tuteur-socratique ~/.claude/skills/
+cp -r tuteur-socratique tuteur-socratique-adulte ~/.claude/skills/
 ```
 
 Ou dans `.claude/skills/` d'un projet pour la limiter à ce projet.
 
 ### Claude (claude.ai et applications)
 
-1. Compresser le dossier `tuteur-socratique/` en `.zip` (le dossier lui-même, pas
-   seulement son contenu).
+1. Compresser le dossier `tuteur-socratique/` ou `tuteur-socratique-adulte/` en
+   `.zip` (le dossier lui-même, pas seulement son contenu).
 2. L'importer dans les paramètres de Claude, section Skills.
 
 ### ChatGPT
 
-ChatGPT ne lit pas ce format directement. Deux façons de faire :
+ChatGPT ne lit pas ce format directement. Trois façons de faire :
 
 - **Un GPT pour tous les niveaux** : créer un GPT personnalisé, coller dans ses
   instructions le contenu de `SKILL.md` sans l'en-tête (les lignes entre les deux
@@ -77,10 +104,13 @@ ChatGPT ne lit pas ce format directement. Deux façons de faire :
 - **Un GPT par niveau** : coller `SKILL.md` sans l'en-tête dans les instructions et
   n'ajouter que le fichier du profil voulu dans les connaissances. On peut alors
   supprimer l'étape de choix du profil.
+- **Un GPT pour adultes** : coller dans les instructions le contenu de
+  `tuteur-socratique-adulte/SKILL.md` sans l'en-tête. Il n'y a aucun fichier à
+  ajouter dans les connaissances.
 
-Le contenu de `SKILL.md` sans l'en-tête fait un peu moins de 8 000 caractères, la
-limite habituelle des instructions d'un GPT : il n'y a pas la place d'y coller un
-profil en plus.
+Le contenu de chaque `SKILL.md` sans l'en-tête fait un peu moins de 8 000
+caractères, la limite habituelle des instructions d'un GPT : il n'y a pas la place
+d'y coller un profil en plus.
 
 Dans un GPT dédié au tutorat, la section « Garde : vérifier l'intention » peut être
 retirée. Deux règles sont à vérifier en priorité après l'installation, car ce sont
@@ -99,13 +129,19 @@ Lancer une séance :
 >
 > Aide-moi à maîtriser les espaces vectoriels pour mes colles.
 
+Avec la version pour adultes :
+
+> Apprends-moi les bases de SQL, je veux écrire seule les requêtes de mon équipe.
+>
+> Je veux apprendre à lire un bilan comptable, interroge-moi.
+
 Commandes disponibles à tout moment :
 
 | Commande | Effet |
 |---|---|
 | `ma progression` | affiche la carte de compétences |
 | `plus dur` / `plus facile` | ajuste la difficulté |
-| `donne-moi la réponse` | sort du mode socratique pour la question en cours (avec des limites selon le profil) |
+| `donne-moi la réponse` | sort du mode socratique pour la question en cours (avec des limites selon le profil scolaire) |
 | `sauvegarde` | produit un bloc daté à conserver |
 | `reprendre :` + le bloc | reprend la séance, en commençant par retester ce qui a été vu |
 
@@ -131,8 +167,11 @@ l'enfant. Le profil primaire est écrit dans ce sens.
 
 ## Adapter la skill
 
-- Les règles communes (méthode, évaluation, commandes) sont dans `SKILL.md`.
+- Les règles communes (méthode, évaluation, commandes) sont dans
+  `tuteur-socratique/SKILL.md`.
 - Ce qui dépend de l'âge (ton, durée, moment où l'on aide, affichage) est dans le
   fichier du profil. Pour ajouter un profil, par exemple pour une discipline ou une
   filière, créer un fichier dans `references/` et l'ajouter à la liste de l'étape 2
   du démarrage dans `SKILL.md`.
+- La version pour adultes est un fichier indépendant : une règle de méthode modifiée
+  dans l'une des deux skills est à reporter dans l'autre.
