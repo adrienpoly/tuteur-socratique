@@ -119,6 +119,37 @@ ci-dessus.
 
 Ne pas commiter ni pousser sans demande explicite.
 
-Un tag `vX.Y.Z` poussé déclenche `.github/workflows/release.yml`, qui publie une
-release avec un `.zip` par skill. Le README pointe vers `releases/latest` : ne pas
-renommer les dossiers des skills sans mettre à jour le workflow et ces liens.
+## Publication
+
+Les utilisateurs de l'app Claude installent les skills à partir des `.zip` attachés
+à la dernière release GitHub. Un changement fusionné dans `main` ne leur parvient
+donc qu'après la publication d'une nouvelle version.
+
+Ne publier que sur demande explicite, comme pour un commit. Étapes :
+
+1. Vérifier que `main` est à jour, sans changement en attente, et que les
+   vérifications ci-dessus (taille, séance d'essai) ont été faites.
+2. Choisir le numéro à partir du dernier tag (`git tag --sort=-v:refname | head -1`) :
+   correctif pour une reformulation sans effet sur le comportement, mineur pour une
+   règle ajoutée ou modifiée, majeur pour un changement des commandes ou du format
+   du bloc de sauvegarde, qui casse la reprise d'une séance sauvegardée.
+3. Créer et pousser le tag depuis `main` :
+
+   ```bash
+   git tag vX.Y.Z && git push origin vX.Y.Z
+   ```
+
+4. Le tag déclenche `.github/workflows/release.yml`, qui compresse chaque dossier de
+   skill et crée la release avec `tuteur-socratique.zip` et
+   `tuteur-socratique-adulte.zip`. Vérifier le résultat :
+
+   ```bash
+   gh run list --workflow release.yml --limit 1
+   gh release view vX.Y.Z --json assets -q '.assets[].name'
+   ```
+
+Le README pointe vers `releases/latest/download/<skill>.zip` : ne pas renommer un
+dossier de skill ni un `.zip` sans mettre à jour le workflow et ces liens. Une
+nouvelle skill s'ajoute à la boucle du workflow, à la commande `gh release create`
+et aux liens du README. `chatgpt/college.md` n'est pas dans les `.zip` : il se copie
+depuis le dépôt.
