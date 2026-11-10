@@ -14,7 +14,8 @@ carte de compétences et ne valide un niveau que sur des réussites réelles.
 ## Ce que font les skills
 
 - **Diagnostic de départ** : 3 à 5 questions pour situer l'élève avant d'enseigner
-  quoi que ce soit.
+  quoi que ce soit. Une réussite au diagnostic place une compétence au niveau 3 au
+  plus.
 - **Carte de compétences** : le sujet est découpé en compétences concrètes, chacune
   suivie sur 6 niveaux (0 à 5) avec le compte des réussites qui le justifient.
 - **Méthode socratique** : une question à la fois, pas de réponse donnée à la
@@ -73,6 +74,8 @@ tuteur-socratique/
     └── superieur.md
 tuteur-socratique-adulte/
 └── SKILL.md              version générique pour adultes, en un seul fichier
+chatgpt/
+└── college.md            règles communes + profil collège, à coller dans un GPT
 ```
 
 ## Installation
@@ -107,6 +110,9 @@ ChatGPT ne lit pas ce format directement. Trois façons de faire :
 - **Un GPT pour adultes** : coller dans les instructions le contenu de
   `tuteur-socratique-adulte/SKILL.md` sans l'en-tête. Il n'y a aucun fichier à
   ajouter dans les connaissances.
+- **Un GPT pour le collège** : coller dans les instructions tout le contenu de
+  `chatgpt/college.md`, qui réunit les règles communes et le profil collège en un
+  seul texte de moins de 8 000 caractères. Aucun fichier à ajouter.
 
 Le contenu de chaque `SKILL.md` sans l'en-tête fait un peu moins de 8 000
 caractères, la limite habituelle des instructions d'un GPT : il n'y a pas la place
