@@ -74,8 +74,11 @@ tuteur-socratique/
     └── superieur.md
 tuteur-socratique-adulte/
 └── SKILL.md              version générique pour adultes, en un seul fichier
-chatgpt/
-└── college.md            règles communes + profil collège, à coller dans un GPT
+chatgpt/                  règles communes + un profil, à coller dans un GPT
+├── primaire.md
+├── college.md
+├── lycee.md
+└── superieur.md
 ```
 
 ## Installation
@@ -107,24 +110,34 @@ seulement son contenu) et importer ce `.zip`.
 
 ### ChatGPT
 
-ChatGPT ne lit pas ce format directement. Trois façons de faire :
+ChatGPT ne lit pas ce format directement. Quatre façons de faire :
+
+- **Un GPT par niveau, en un seul texte** (le plus simple) : créer un GPT
+  personnalisé et coller dans ses instructions tout le contenu du fichier du
+  niveau voulu. Chacun réunit les règles communes et un profil en moins de 8 000
+  caractères. Aucun fichier à ajouter dans les connaissances.
+
+  | Niveau | Classes | Fichier |
+  |---|---|---|
+  | Primaire | CP à CM2 | [`chatgpt/primaire.md`](chatgpt/primaire.md) |
+  | Collège | 6e à 3e | [`chatgpt/college.md`](chatgpt/college.md) |
+  | Lycée | 2de à Tle, CAP, bac pro | [`chatgpt/lycee.md`](chatgpt/lycee.md) |
+  | Supérieur | après le bac, adultes en formation | [`chatgpt/superieur.md`](chatgpt/superieur.md) |
 
 - **Un GPT pour tous les niveaux** : créer un GPT personnalisé, coller dans ses
   instructions le contenu de `SKILL.md` sans l'en-tête (les lignes entre les deux
   `---`), et ajouter les quatre fichiers de `references/` dans ses connaissances.
-- **Un GPT par niveau** : coller `SKILL.md` sans l'en-tête dans les instructions et
-  n'ajouter que le fichier du profil voulu dans les connaissances. On peut alors
-  supprimer l'étape de choix du profil.
+- **Un GPT par niveau, avec le profil en connaissance** : coller `SKILL.md` sans
+  l'en-tête dans les instructions et n'ajouter que le fichier du profil voulu dans
+  les connaissances. On peut alors supprimer l'étape de choix du profil.
 - **Un GPT pour adultes** : coller dans les instructions le contenu de
   `tuteur-socratique-adulte/SKILL.md` sans l'en-tête. Il n'y a aucun fichier à
   ajouter dans les connaissances.
-- **Un GPT pour le collège** : coller dans les instructions tout le contenu de
-  `chatgpt/college.md`, qui réunit les règles communes et le profil collège en un
-  seul texte de moins de 8 000 caractères. Aucun fichier à ajouter.
 
 Le contenu de chaque `SKILL.md` sans l'en-tête fait un peu moins de 8 000
 caractères, la limite habituelle des instructions d'un GPT : il n'y a pas la place
-d'y coller un profil en plus.
+d'y coller un profil en plus. Les fichiers de `chatgpt/` sont une fusion resserrée
+des deux, écrite pour tenir dans cette limite.
 
 Dans un GPT dédié au tutorat, la section « Garde : vérifier l'intention » peut être
 retirée. Deux règles sont à vérifier en priorité après l'installation, car ce sont

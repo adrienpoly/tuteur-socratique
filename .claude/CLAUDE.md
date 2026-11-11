@@ -19,8 +19,11 @@ tuteur-socratique/
     └── superieur.md               après le bac, adultes
 tuteur-socratique-adulte/
 └── SKILL.md                       version générique pour adultes, sans profil
-chatgpt/
-└── college.md                     instructions d'un GPT collège, en un seul texte
+chatgpt/                           instructions d'un GPT par profil, en un seul texte
+├── primaire.md
+├── college.md
+├── lycee.md
+└── superieur.md
 ```
 
 ## Où mettre quoi
@@ -43,11 +46,12 @@ chatgpt/
   et les valeurs du profil supérieur, sans classe, programme ni examen. Une règle de
   méthode (boucle d'enseignement, évaluation, carte, commandes) modifiée dans l'une
   des deux skills est à reporter dans l'autre.
-- `chatgpt/college.md` : fusion de `tuteur-socratique/SKILL.md` et de
-  `references/college.md`, sans en-tête YAML, à coller tel quel dans les
-  instructions d'un GPT. Toute règle modifiée dans l'une de ses deux sources est à
-  y reporter. Le fichier entier doit rester sous 8 000 caractères
-  (`wc -m chatgpt/college.md`).
+- `chatgpt/<profil>.md` : fusion de `tuteur-socratique/SKILL.md` et de
+  `references/<profil>.md`, sans en-tête YAML, à coller tel quel dans les
+  instructions d'un GPT. Toute règle modifiée dans `SKILL.md` est à reporter dans
+  les quatre fichiers, et toute règle modifiée dans un profil dans le fichier
+  correspondant. Chaque fichier entier doit rester sous 8 000 caractères
+  (`wc -m chatgpt/*.md`).
 
 ## Contraintes
 
@@ -151,5 +155,5 @@ Ne publier que sur demande explicite, comme pour un commit. Étapes :
 Le README pointe vers `releases/latest/download/<skill>.zip` : ne pas renommer un
 dossier de skill ni un `.zip` sans mettre à jour le workflow et ces liens. Une
 nouvelle skill s'ajoute à la boucle du workflow, à la commande `gh release create`
-et aux liens du README. `chatgpt/college.md` n'est pas dans les `.zip` : il se copie
-depuis le dépôt.
+et aux liens du README. Les fichiers de `chatgpt/` ne sont pas dans les `.zip` :
+ils se copient depuis le dépôt.
