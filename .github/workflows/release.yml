@@ -18,7 +18,8 @@ jobs:
       # contenu : c'est ce que l'import de Claude attend.
       - name: Compresser les skills
         run: |
-          for skill in tuteur-socratique tuteur-socratique-adulte; do
+          for skill in tuteur-socratique tuteur-socratique-adulte \
+              aide-aux-devoirs eleve-a-instruire; do
             zip -r "$skill.zip" "$skill" -x "*.DS_Store"
           done
 
@@ -28,4 +29,5 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" \
             tuteur-socratique.zip tuteur-socratique-adulte.zip \
+            aide-aux-devoirs.zip eleve-a-instruire.zip \
             --title "$GITHUB_REF_NAME" --generate-notes

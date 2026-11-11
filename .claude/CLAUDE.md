@@ -1,8 +1,10 @@
 # CLAUDE.md
 
-Ce dépôt contient deux skills de tutorat socratique en français : `tuteur-socratique`
-pour les élèves et étudiants du CP au supérieur, et `tuteur-socratique-adulte`, une
-version générique pour un adulte qui apprend un sujet hors cadre scolaire. Il n'y a
+Ce dépôt contient quatre skills en français pour apprendre et réviser :
+`tuteur-socratique` pour les élèves et étudiants du CP au supérieur,
+`tuteur-socratique-adulte`, une version générique pour un adulte qui apprend un
+sujet hors cadre scolaire, `aide-aux-devoirs` pour un exercice précis à faire
+soi-même, et `eleve-a-instruire`, où l'élève explique une notion au modèle. Il n'y a
 pas de code : uniquement des fichiers Markdown lus par un modèle (Claude, ou ChatGPT
 via un GPT personnalisé).
 
@@ -19,6 +21,10 @@ tuteur-socratique/
     └── superieur.md               après le bac, adultes
 tuteur-socratique-adulte/
 └── SKILL.md                       version générique pour adultes, sans profil
+aide-aux-devoirs/
+└── SKILL.md                       un exercice précis, indices gradués, sans résultat
+eleve-a-instruire/
+└── SKILL.md                       l'élève explique, le modèle joue un camarade
 chatgpt/                           instructions d'un GPT par profil, en un seul texte
 ├── primaire.md
 ├── college.md
@@ -46,6 +52,12 @@ chatgpt/                           instructions d'un GPT par profil, en un seul 
   et les valeurs du profil supérieur, sans classe, programme ni examen. Une règle de
   méthode (boucle d'enseignement, évaluation, carte, commandes) modifiée dans l'une
   des deux skills est à reporter dans l'autre.
+- `aide-aux-devoirs/SKILL.md` et `eleve-a-instruire/SKILL.md` : chacune tient dans
+  ce seul fichier, sans profil ; ce qui dépend de l'âge est dans sa rubrique
+  « Adapter à la classe ». Elles ne reprennent ni la carte de compétences ni les
+  niveaux, mais gardent les règles transversales du tutorat (une question à la
+  fois, pas de flatterie, ne jamais présenter une réponse fausse comme juste, le
+  cours du professeur comme référence) : les y reporter si elles changent.
 - `chatgpt/<profil>.md` : fusion de `tuteur-socratique/SKILL.md` et de
   `references/<profil>.md`, sans en-tête YAML, à coller tel quel dans les
   instructions d'un GPT. Toute règle modifiée dans `SKILL.md` est à reporter dans
@@ -60,7 +72,8 @@ chatgpt/                           instructions d'un GPT par profil, en un seul 
   Vérifier après chaque modification :
 
   ```bash
-  for f in tuteur-socratique tuteur-socratique-adulte; do
+  for f in tuteur-socratique tuteur-socratique-adulte aide-aux-devoirs \
+    eleve-a-instruire; do
     awk 'f>=2{print} /^---$/{f++}' "$f/SKILL.md" | wc -m
   done
   ```
@@ -68,18 +81,25 @@ chatgpt/                           instructions d'un GPT par profil, en un seul 
   Si la limite approche dans `tuteur-socratique`, déplacer du contenu vers les
   profils plutôt que de comprimer les règles.
 - **En-tête YAML** : `name` doit rester identique au nom du dossier
-  (`tuteur-socratique`, `tuteur-socratique-adulte`). La `description` décide du
+  (`tuteur-socratique`, `tuteur-socratique-adulte`, `aide-aux-devoirs`,
+  `eleve-a-instruire`). La `description` décide du
   déclenchement de la skill : elle doit garder les phrases déclencheuses en français
   et l'exclusion des questions ponctuelles. Celle de la version pour adultes renvoie
   vers `tuteur-socratique` pour qui a une classe ou un examen, afin que les deux
-  skills ne se déclenchent pas sur la même demande.
+  skills ne se déclenchent pas sur la même demande. Celles de `aide-aux-devoirs` et
+  de `eleve-a-instruire` renvoient de même vers `tuteur-socratique` pour apprendre
+  ou réviser un chapitre.
 - **Pas de contenu de programme en dur** : ne pas écrire les modalités d'un examen
   (épreuves, coefficients, dates) ni le détail d'un programme. Ils changent, et le
   tuteur demande à l'élève ce qui est attendu dans sa classe.
 - **Commandes** : les commandes de l'élève (« ma progression », « plus dur »,
   « plus facile », « donne-moi la réponse », « sauvegarde », « reprendre : ») sont
   citées dans les deux `SKILL.md`, dans les profils et dans le README. Tout
-  changement se fait aux quatre endroits.
+  changement se fait aux quatre endroits. `aide-aux-devoirs` (« indice »,
+  « vérifie », « donne-moi la réponse », « exercice suivant ») et
+  `eleve-a-instruire` (« bilan », « plus dur », « plus facile », « donne-moi la
+  réponse », « sauvegarde », « reprendre : ») ont leurs propres commandes, citées
+  dans leur `SKILL.md` et dans le README.
 - **README** : le tableau des profils et la section ChatGPT reprennent des valeurs
   des profils (durées, nombre d'erreurs avant l'aide, taille de `SKILL.md`). Les
   mettre à jour en même temps.
@@ -116,6 +136,18 @@ minimum :
 Pour la version pour adultes, les mêmes points s'appliquent, avec l'objectif et
 l'expérience à la place de la classe au point 2 et la carte par défaut au point 5.
 
+Pour `aide-aux-devoirs`, vérifier au minimum : sans énoncé, il le demande ; il fait
+reformuler la consigne ; un seul indice à la fois, du plus bas de l'échelle ;
+« donne-moi la réponse », même répété, ne donne pas le résultat final ; une réponse
+fausse est signalée sans être corrigée ; un devoir rédigé n'est pas écrit à la place
+de l'élève.
+
+Pour `eleve-a-instruire`, vérifier au minimum : dans le rôle, il ne complète pas une
+explication incomplète et ne pose qu'une question à la fois ; une explication
+fausse n'est pas corrigée dans le rôle mais mise en contradiction ; « bilan » fait
+sortir du rôle, corrige chaque erreur et dévoile les pièges ; un point non formulé
+par l'élève n'est pas noté « clair ».
+
 Pour une modification d'un `SKILL.md`, refaire aussi la vérification de taille
 ci-dessus.
 
@@ -144,8 +176,7 @@ Ne publier que sur demande explicite, comme pour un commit. Étapes :
    ```
 
 4. Le tag déclenche `.github/workflows/release.yml`, qui compresse chaque dossier de
-   skill et crée la release avec `tuteur-socratique.zip` et
-   `tuteur-socratique-adulte.zip`. Vérifier le résultat :
+   skill et crée la release avec un `.zip` par skill. Vérifier le résultat :
 
    ```bash
    gh run list --workflow release.yml --limit 1

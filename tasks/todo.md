@@ -69,3 +69,27 @@ qui apprend un sujet hors cadre scolaire.
   plafonné à 3, `?` pour le non testé, bloc de sauvegarde avec « reprendre par ».
 - Non rejoué : « reprendre : » dans une nouvelle conversation, avocat du diable,
   bilan final, et les profils primaire, lycée et supérieur.
+
+# Versions ChatGPT par profil, aide aux devoirs, élève à instruire (2026-11-11)
+
+- [x] `chatgpt/primaire.md`, `lycee.md`, `superieur.md` (commit `97c9a69`, poussé)
+- [x] `aide-aux-devoirs/SKILL.md` et `eleve-a-instruire/SKILL.md`
+- [x] Workflow de release, README et `.claude/CLAUDE.md` mis à jour
+- [x] Tailles et séances d'essai : voir Résultats
+
+## Résultats
+
+- Tailles : `chatgpt/primaire.md` 7 281, `lycee.md` 7 617, `superieur.md` 7 406 ;
+  `aide-aux-devoirs` 6 935, `eleve-a-instruire` 6 764 caractères.
+- Séances d'essai tour par tour (un sous-agent par skill), niveau collège.
+  `aide-aux-devoirs` sur Pythagore : énoncé demandé d'abord, « donne-moi la
+  réponse » refusé avec l'indice le plus bas, réponse fausse signalée sans être
+  corrigée, unité et justification exigées, rédaction de français non écrite.
+  `eleve-a-instruire` sur l'addition des fractions : règle annoncée, explication
+  fausse mise en contradiction dans le rôle, bilan hors du rôle avec tableau,
+  erreur corrigée, piège dévoilé, points non formulés notés « manquant ».
+- Non rejoué : les trois nouveaux fichiers `chatgpt/` ; pour les deux skills, les
+  profils primaire, lycée et supérieur, « sauvegarde » / « reprendre : », le
+  blocage, la garde (question ponctuelle), et l'essai dans ChatGPT.
+- À faire sur demande : commit, puis tag mineur pour publier les deux `.zip` (les
+  liens du README renvoient une erreur 404 jusque-là).
